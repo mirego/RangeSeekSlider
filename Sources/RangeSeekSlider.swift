@@ -208,6 +208,13 @@ import UIKit
             updateLabelPositions()
         }
     }
+    
+    /// Set the horizontal margin for the slider bar (default 0.0)
+    @IBInspectable open var barSidePadding: CGFloat = 0.0 {
+        didSet {
+            setNeedsLayout()
+        }
+    }
 
     /// The label displayed in accessibility mode for minimum value handler. If not set, the default is empty String.
     @IBInspectable open var minLabelAccessibilityLabel: String?
@@ -227,14 +234,14 @@ import UIKit
     private enum HandleTracking { case none, left, right }
     private var handleTracking: HandleTracking = .none
 
-    private let sliderLine: CALayer = CALayer()
-    private let sliderLineBetweenHandles: CALayer = CALayer()
+    public let sliderLine: CALayer = CALayer()
+    public let sliderLineBetweenHandles: CALayer = CALayer()
 
-    private let leftHandle: CALayer = CALayer()
-    private let rightHandle: CALayer = CALayer()
+    public let leftHandle: CALayer = CALayer()
+    public let rightHandle: CALayer = CALayer()
 
-    fileprivate let minLabel: CATextLayer = CATextLayer()
-    fileprivate let maxLabel: CATextLayer = CATextLayer()
+    public let minLabel: CATextLayer = CATextLayer()
+    public let maxLabel: CATextLayer = CATextLayer()
 
     private var minLabelTextSize: CGSize = .zero
     private var maxLabelTextSize: CGSize = .zero
@@ -459,7 +466,6 @@ import UIKit
     }
 
     private func updateLineHeight() {
-        let barSidePadding: CGFloat = 16.0
         let yMiddle: CGFloat = frame.height / 2.0
         let lineLeftSide: CGPoint = CGPoint(x: barSidePadding, y: yMiddle)
         let lineRightSide: CGPoint = CGPoint(x: frame.width - barSidePadding,
